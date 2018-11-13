@@ -27,6 +27,9 @@ jobs:
             export NVM_BIN=/usr/bin/nodejs
             export PATH=$NVM_BIN:$PATH
             cd ~/pass-culture-main/webapp
+            node --version
+            yarn --version
+            google-chrome --version
             yarn install
             yarn test:unit
       - run:
