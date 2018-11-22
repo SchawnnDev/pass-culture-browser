@@ -42,7 +42,7 @@ class SignupPage extends React.PureComponent {
           </h2>
           <Form
             name="user"
-            action="/users/signup"
+            action="/users/signup/webapp"
             layout="vertical"
             handleSuccessNotification={null}
             handleSuccessRedirect={() => '/decouverte'}
