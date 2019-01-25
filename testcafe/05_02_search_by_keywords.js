@@ -36,3 +36,61 @@ test("Je fais une recherche par mots-clés et j'ai des résultats", async t => {
     .wait(500)
   await t.expect(resultsTitle.innerText).eql('"LEPAGE" : 1 RÉSULTAT')
 })
+
+// https://passculture.atlassian.net/browse/PC-1316
+
+// Voici ce qui est fait aujourd’hui par rapport aux 3 points :
+//
+// La recherche aujourd’hui cherche dans certains attributs de classe qui ne correspondent pas à ce qui est explicité sur ce ticket :
+//
+// Pour la recherche d’offers :
+//
+// Nom du lieu
+//
+// Adresse du lieu
+//
+// SIRET
+//
+// Nom de la structure
+//
+// Adresse de la structure
+//
+// SIREN
+//
+// Si event :
+//
+// Nom de l'évènement
+//
+// Description de l'évènement
+//
+// Si thing :
+//
+// Nom de la chose
+//
+// Auteur
+//
+// “byArtist”
+//
+// Description
+//
+// Pour la recherche de venues
+//
+// Nom du lieu
+//
+// Adresse du lieu
+//
+// SIRET
+//
+// Pour la recherche d’offerers
+//
+// Nom de la structure
+//
+// Adresse de la structure
+//
+// SIREN
+//
+// → Il faudrait remettre à plat ceci (probablement dans un ticket à cadrer)
+//
+// Recherche avec ET → fait par Erwan Ledoux
+//
+// Recherche avec OU quand rien avec ET : pas implémenté et, si je me souviens bien Ion , disait qu’il fallait afficher quand n’avait pas trouvé la recherche exacte (à cadrer aussi)
