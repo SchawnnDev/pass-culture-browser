@@ -11,6 +11,13 @@ import Verso from '../../verso'
 import currentRecommendationSelector from '../../../selectors/currentRecommendation'
 import { recommendationNormalizer } from '../../../utils/normalizers'
 
+const toRectoDraggableBounds = {
+  bottom: 0,
+  left: 0,
+  right: 0,
+  top: 0,
+}
+
 class SearchDetails extends Component {
   constructor() {
     super()
@@ -71,6 +78,7 @@ class SearchDetails extends Component {
             )}
           />
         )}
+
         <Verso
           extraClassName="with-header"
           forceDetailsVisible={forceDetailsVisible}
@@ -85,9 +93,14 @@ class SearchDetails extends Component {
   }
 }
 
+SearchDetails.defaultProps = {
+  verticalSlideRatio: 0.3
+}
+
 SearchDetails.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
+  verticalSlideRatio: PropTypes.number
 }
 
 function mapStateToProps(state, ownProps) {

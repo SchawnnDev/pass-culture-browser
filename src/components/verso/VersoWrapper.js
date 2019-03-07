@@ -1,16 +1,26 @@
 import PropTypes from 'prop-types'
 import get from 'lodash.get'
 import React, { Component } from 'react'
+import Draggable from 'react-draggable'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 import VersoControl from './VersoControl'
-import { getHeaderColor } from '../../utils/colors'
+import { getPageY } from '../../helpers'
+import { makeDraggable, makeUndraggable } from '../../reducers/card'
 import currentRecommendationSelector from '../../selectors/currentRecommendation'
+import { getHeaderColor } from '../../utils/colors'
 import { ROOT_PATH } from '../../utils/config'
 
-import { makeDraggable, makeUndraggable } from '../../reducers/card'
+
+
+const toRectoDraggableBounds = {
+  bottom: 0,
+  left: 0,
+  right: 0,
+  top: 0,
+}
 
 export class RawVersoWrapper extends Component {
   constructor(props) {
@@ -35,6 +45,25 @@ export class RawVersoWrapper extends Component {
   componentWillUnmount() {
     if (!this.$el) return
     this.$el.removeEventListener('touchmove', this.toucheMoveHandler)
+  }
+
+  onStop = event => {
+    const { flipHandler, height, verticalSlideRatio } = this.props
+    const shiftedDistance = height - getPageY(event)
+
+    console.log('HEIN')
+
+    const thresholdDistance = height * verticalSlideRatio
+    if (shiftedDistance > thresholdDistance) {
+      console.log('OUAI')
+      // DON T KNOW YET HOW TO DO OTHERWISE:
+      // IF IT IS CALLED DIRECTLY
+      // THEN on unmount time of the component
+      // one of the drag event handler will still complain
+      // to want to do a setState while the component is now
+      // unmounted...
+      setTimeout(() => flipHandler())
+    }
   }
 
   toucheMoveHandler() {
@@ -85,6 +114,13 @@ export class RawVersoWrapper extends Component {
             this.$header = $el
           }}
         >
+          <Draggable
+            bounds={toRectoDraggableBounds}
+            onStop={() => console.log('qsdqsd')}
+            axis="y"
+          >
+            <div className="drag"/>
+          </Draggable>
           <h1>
             {' '}
             {get(eventOrThing, 'name')}
