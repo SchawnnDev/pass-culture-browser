@@ -1,4 +1,4 @@
-import { getBookingName } from '../VersoBookingButton'
+import { getBookingName } from '../booking-button'
 
 describe('src | components | verso | getBookingName', () => {
   it('should return booking name', () => {
